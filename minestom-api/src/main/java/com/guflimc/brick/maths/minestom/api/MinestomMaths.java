@@ -1,5 +1,6 @@
 package com.guflimc.brick.maths.minestom.api;
 
+import com.guflimc.brick.maths.api.geo.Location;
 import com.guflimc.brick.maths.api.geo.Point;
 import com.guflimc.brick.maths.api.geo.Position;
 import com.guflimc.brick.maths.api.geo.Vector;
@@ -21,7 +22,7 @@ public class MinestomMaths {
     }
 
     public static Position toPosition(Pos pos) {
-        return new Position(null, pos.x(), pos.y(), pos.z(), pos.yaw(), pos.pitch());
+        return new Location(null, pos.x(), pos.y(), pos.z(), pos.yaw(), pos.pitch());
     }
 
 }
