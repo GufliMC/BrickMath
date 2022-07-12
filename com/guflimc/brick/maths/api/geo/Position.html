@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="Direction.html" title="interface in com.guflimc.brick.maths.api.geo">Direction</a></code>, <code><a href="Location.html" title="interface in com.guflimc.brick.maths.api.geo">Location</a></code>, <code><a href="Point.html" title="interface in com.guflimc.brick.maths.api.geo">Point</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Position</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldId, double&nbsp;x, double&nbsp;y, double&nbsp;z, float&nbsp;yaw, float&nbsp;pitch)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">Position</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldName, double&nbsp;x, double&nbsp;y, double&nbsp;z, float&nbsp;yaw, float&nbsp;pitch)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a>
 implements <a href="Location.html" title="interface in com.guflimc.brick.maths.api.geo">Location</a>, <a href="Direction.html" title="interface in com.guflimc.brick.maths.api.geo">Direction</a></span></div>
 </section>
@@ -95,7 +95,7 @@ implements <a href="Location.html" title="interface in com.guflimc.brick.maths.a
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,double,double,double,float,float)" class="member-name-link">Position</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldId,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,double,double,double,float,float)" class="member-name-link">Position</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldName,
  double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z,
@@ -139,9 +139,9 @@ implements <a href="Location.html" title="interface in com.guflimc.brick.maths.a
 <div class="block">Returns a string representation of this record class.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#worldId()" class="member-name-link">worldId</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#worldName()" class="member-name-link">worldName</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the value of the <code>worldId</code> record component.</div>
+<div class="block">Returns the value of the <code>worldName</code> record component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#x()" class="member-name-link">x</a>()</code></div>
@@ -186,7 +186,7 @@ implements <a href="Location.html" title="interface in com.guflimc.brick.maths.a
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,double,double,double,float,float)">
 <h3>Position</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldId,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Position</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;worldName,
  double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z,
@@ -195,7 +195,7 @@ implements <a href="Location.html" title="interface in com.guflimc.brick.maths.a
 <div class="block">Creates an instance of a <code>Position</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>worldId</code> - the value for the <code>worldId</code> record component</dd>
+<dd><code>worldName</code> - the value for the <code>worldName</code> record component</dd>
 <dd><code>x</code> - the value for the <code>x</code> record component</dd>
 <dd><code>y</code> - the value for the <code>y</code> record component</dd>
 <dd><code>z</code> - the value for the <code>z</code> record component</dd>
@@ -254,15 +254,15 @@ implements <a href="Location.html" title="interface in com.guflimc.brick.maths.a
 </section>
 </li>
 <li>
-<section class="detail" id="worldId()">
-<h3>worldId</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">worldId</span>()</div>
-<div class="block">Returns the value of the <code>worldId</code> record component.</div>
+<section class="detail" id="worldName()">
+<h3>worldName</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">worldName</span>()</div>
+<div class="block">Returns the value of the <code>worldName</code> record component.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Location.html#worldId()">worldId</a></code>&nbsp;in interface&nbsp;<code><a href="Location.html" title="interface in com.guflimc.brick.maths.api.geo">Location</a></code></dd>
+<dd><code><a href="Location.html#worldName()">worldName</a></code>&nbsp;in interface&nbsp;<code><a href="Location.html" title="interface in com.guflimc.brick.maths.api.geo">Location</a></code></dd>
 <dt>Returns:</dt>
-<dd>the value of the <code>worldId</code> record component</dd>
+<dd>the value of the <code>worldName</code> record component</dd>
 </dl>
 </section>
 </li>
