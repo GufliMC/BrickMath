@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.guflimc.brick.maths.api.geo"},{"l":"com.guflimc.brick.maths.minestom.api"},{"l":"com.guflimc.brick.maths.spigot.api"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.guflimc.brick.maths.api.geo"},{"l":"com.guflimc.brick.maths.database.api"},{"l":"com.guflimc.brick.maths.minestom.api"},{"l":"com.guflimc.brick.maths.spigot.api"}];updateSearchResults();
