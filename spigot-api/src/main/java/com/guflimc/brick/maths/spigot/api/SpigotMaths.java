@@ -12,7 +12,7 @@ public class SpigotMaths {
     }
 
     public static Location toLocation(Position other) {
-        return new Location(Bukkit.getWorld(other.worldId()), other.x(), other.y(), other.z(), other.yaw(), other.pitch());
+        return new Location(Bukkit.getWorld(other.worldName()), other.x(), other.y(), other.z(), other.yaw(), other.pitch());
     }
 
     public static Position toPosition(Location other) {
