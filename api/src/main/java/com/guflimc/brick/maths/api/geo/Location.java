@@ -3,6 +3,14 @@ package com.guflimc.brick.maths.api.geo;
 public record Location(String worldName, double x, double y, double z, float yaw,
                        float pitch) implements Position {
 
+    public Location withPosition(Position position) {
+        return new Location(worldName, position.x(), position.y(), position.z(), position.yaw(), position.pitch());
+    }
+
+    public Location withWorldName(String worldName) {
+        return new Location(worldName, x, y, z, yaw, pitch);
+    }
+
     @Override
     public Location withYaw(float yaw) {
         return new Location(worldName, x, y, z, yaw, pitch);
@@ -21,10 +29,6 @@ public record Location(String worldName, double x, double y, double z, float yaw
     @Override
     public Position withPoint(Point point) {
         return new Location(worldName, point.x(), point.y(), point.z(), yaw, pitch);
-    }
-
-    public Location withWorldName(String worldName) {
-        return new Location(worldName, x, y, z, yaw, pitch);
     }
 
     @Override
