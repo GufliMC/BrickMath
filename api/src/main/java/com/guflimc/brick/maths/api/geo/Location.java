@@ -4,4 +4,6 @@ public interface Location extends Point {
 
     String worldName();
 
+    Location withWorldName(String worldName);
+
 }
