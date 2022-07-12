@@ -1,0 +1,10 @@
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    api project(':api')
+
+    // provided by platform
+    compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
+}
