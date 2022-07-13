@@ -1,49 +1,61 @@
 package com.guflimc.brick.maths.api.geo;
 
-public record Location(String worldName, double x, double y, double z, float yaw,
+import org.jetbrains.annotations.Nullable;
+
+public record Location(@Nullable String worldId, double x, double y, double z, float yaw,
                        float pitch) implements Position {
 
-    public Location withPosition(Position position) {
-        return new Location(worldName, position.x(), position.y(), position.z(), position.yaw(), position.pitch());
+    public final static Location ZERO = new Location(null, 0, 0, 0, 0, 0);
+
+    public Location(Position pos) {
+        this(null, pos.x(), pos.y(), pos.z(), pos.yaw(), pos.pitch());
     }
 
-    public Location withWorldName(String worldName) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+    public Location(Point point) {
+        this(null, point.x(), point.y(), point.z(), 0, 0);
+    }
+
+    public Location withPosition(Position position) {
+        return new Location(worldId, position.x(), position.y(), position.z(), position.yaw(), position.pitch());
+    }
+
+    public Location withWorldId(String worldId) {
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Location withYaw(float yaw) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Location withPitch(float pitch) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Position withYawPitch(float yaw, float pitch) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Position withPoint(Point point) {
-        return new Location(worldName, point.x(), point.y(), point.z(), yaw, pitch);
+        return new Location(worldId, point.x(), point.y(), point.z(), yaw, pitch);
     }
 
     @Override
     public Location withX(double x) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Location withY(double y) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
     public Location withZ(double z) {
-        return new Location(worldName, x, y, z, yaw, pitch);
+        return new Location(worldId, x, y, z, yaw, pitch);
     }
 
     @Override
@@ -63,16 +75,16 @@ public record Location(String worldName, double x, double y, double z, float yaw
 
     @Override
     public Location scale(double v) {
-        return new Location(worldName, x() * v, y() * v, z() * v, yaw, pitch);
+        return new Location(worldId, x() * v, y() * v, z() * v, yaw, pitch);
     }
 
     @Override
     public Point add(double x, double y, double z) {
-        return new Location(worldName, x() + x, y() + y, z() + z, yaw, pitch);
+        return new Location(worldId, x() + x, y() + y, z() + z, yaw, pitch);
     }
 
     @Override
     public Point add(Point other) {
-        return new Location(worldName, x() + other.x(), y() + other.y(), z() + other.z(), yaw, pitch);
+        return new Location(worldId, x() + other.x(), y() + other.y(), z() + other.z(), yaw, pitch);
     }
 }

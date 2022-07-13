@@ -6,6 +6,7 @@ import com.guflimc.brick.maths.api.geo.Position;
 import com.guflimc.brick.maths.api.geo.Vector;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.coordinate.Vec;
+import net.minestom.server.entity.Entity;
 
 public class MinestomMaths {
 
@@ -22,7 +23,19 @@ public class MinestomMaths {
     }
 
     public static Position toPosition(Pos pos) {
+        return toLocation(pos);
+    }
+
+    public static Location toLocation(Pos pos) {
         return new Location(null, pos.x(), pos.y(), pos.z(), pos.yaw(), pos.pitch());
+    }
+
+    public static Location toLocation(Entity entity) {
+        Location loc = toLocation(entity.getPosition());
+        if ( entity.getInstance() != null ) {
+            loc = loc.withWorldId(entity.getInstance().getUniqueId().toString());
+        }
+        return loc;
     }
 
 }

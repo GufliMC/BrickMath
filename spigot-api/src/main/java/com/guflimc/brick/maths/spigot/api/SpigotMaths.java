@@ -11,7 +11,7 @@ public class SpigotMaths {
     }
 
     public static org.bukkit.Location toLocation(Location other) {
-        return new org.bukkit.Location(Bukkit.getWorld(other.worldName()), other.x(), other.y(), other.z(), other.yaw(), other.pitch());
+        return new org.bukkit.Location(Bukkit.getWorld(other.worldId()), other.x(), other.y(), other.z(), other.yaw(), other.pitch());
     }
 
     public static Location toPosition(org.bukkit.Location other) {

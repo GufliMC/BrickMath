@@ -2,6 +2,8 @@ package com.guflimc.brick.maths.api.geo;
 
 public record Vector(double x, double y, double z) implements Point {
 
+    public static final Vector ZERO = new Vector(0, 0, 0);
+
     @Override
     public Vector addX(double x) {
         return withX(this.x + x);

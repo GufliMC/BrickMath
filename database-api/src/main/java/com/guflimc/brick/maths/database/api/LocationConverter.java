@@ -11,7 +11,7 @@ import marcono1234.gson.recordadapter.RecordTypeAdapterFactory;
 public class LocationConverter implements AttributeConverter<Location, String> {
 
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(RecordTypeAdapterFactory.DEFAULT)
+            .registerTypeAdapterFactory(RecordTypeAdapterFactory.builder().allowMissingComponentValues().create())
             .create();
 
     @Override
