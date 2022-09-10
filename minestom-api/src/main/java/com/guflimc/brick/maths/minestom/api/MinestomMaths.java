@@ -1,9 +1,9 @@
 package com.guflimc.brick.maths.minestom.api;
 
-import com.guflimc.brick.maths.api.geo.Location;
-import com.guflimc.brick.maths.api.geo.Point;
-import com.guflimc.brick.maths.api.geo.Position;
-import com.guflimc.brick.maths.api.geo.Vector;
+import com.guflimc.brick.maths.api.geo.pos.Location;
+import com.guflimc.brick.maths.api.geo.pos.Point;
+import com.guflimc.brick.maths.api.geo.pos.Position;
+import com.guflimc.brick.maths.api.geo.pos.Vector;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.entity.Entity;

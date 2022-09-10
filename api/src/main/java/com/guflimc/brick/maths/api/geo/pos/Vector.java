@@ -1,8 +1,12 @@
-package com.guflimc.brick.maths.api.geo;
+package com.guflimc.brick.maths.api.geo.pos;
 
 public record Vector(double x, double y, double z) implements Point {
 
     public static final Vector ZERO = new Vector(0, 0, 0);
+
+    public static Vector from(Point point) {
+        return new Vector(point.x(), point.y(), point.z());
+    }
 
     @Override
     public Vector addX(double x) {

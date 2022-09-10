@@ -1,6 +1,6 @@
-package com.guflimc.brick.maths.api.geo;
+package com.guflimc.brick.maths.api.geo.pos;
 
-public interface Position extends Point {
+public sealed interface Position extends Point permits Location {
 
     float yaw();
 

@@ -1,7 +1,7 @@
 package com.guflimc.brick.maths.spigot.api;
 
-import com.guflimc.brick.maths.api.geo.Location;
-import com.guflimc.brick.maths.api.geo.Vector;
+import com.guflimc.brick.maths.api.geo.pos.Location;
+import com.guflimc.brick.maths.api.geo.pos.Vector;
 import org.bukkit.Bukkit;
 
 public class SpigotMaths {

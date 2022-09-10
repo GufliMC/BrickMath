@@ -1,6 +1,6 @@
-package com.guflimc.brick.maths.api.geo;
+package com.guflimc.brick.maths.api.geo.pos;
 
-public interface Point {
+public sealed interface Point permits Vector, Position {
 
     double x();
 

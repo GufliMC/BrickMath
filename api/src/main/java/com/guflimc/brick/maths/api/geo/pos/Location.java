@@ -1,4 +1,4 @@
-package com.guflimc.brick.maths.api.geo;
+package com.guflimc.brick.maths.api.geo.pos;
 
 import org.jetbrains.annotations.Nullable;
 

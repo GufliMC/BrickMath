@@ -2,7 +2,7 @@ package com.guflimc.brick.maths.database.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.guflimc.brick.maths.api.geo.Vector;
+import com.guflimc.brick.maths.api.geo.pos.Vector;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import marcono1234.gson.recordadapter.RecordTypeAdapterFactory;
