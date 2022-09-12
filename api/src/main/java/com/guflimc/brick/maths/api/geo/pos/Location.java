@@ -1,25 +1,32 @@
 package com.guflimc.brick.maths.api.geo.pos;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public record Location(@Nullable String worldId, double x, double y, double z, float yaw,
+import java.util.UUID;
+
+public record Location(@Nullable UUID worldId, double x, double y, double z, float yaw,
                        float pitch) implements Position {
 
     public final static Location ZERO = new Location(null, 0, 0, 0, 0, 0);
 
-    public Location(Position pos) {
+    public Location(@NotNull UUID worldId, Point point) {
+        this(worldId, point.x(), point.y(), point.z(), 0, 0);
+    }
+
+    public Location(@NotNull Position pos) {
         this(null, pos.x(), pos.y(), pos.z(), pos.yaw(), pos.pitch());
     }
 
-    public Location(Point point) {
+    public Location(@NotNull Point point) {
         this(null, point.x(), point.y(), point.z(), 0, 0);
     }
 
-    public Location withPosition(Position position) {
+    public Location withPosition(@NotNull Position position) {
         return new Location(worldId, position.x(), position.y(), position.z(), position.yaw(), position.pitch());
     }
 
-    public Location withWorldId(String worldId) {
+    public Location withWorldId(UUID worldId) {
         return new Location(worldId, x, y, z, yaw, pitch);
     }
 
@@ -39,7 +46,7 @@ public record Location(@Nullable String worldId, double x, double y, double z, f
     }
 
     @Override
-    public Position withPoint(Point point) {
+    public Position withPoint(@NotNull Point point) {
         return new Location(worldId, point.x(), point.y(), point.z(), yaw, pitch);
     }
 
@@ -84,7 +91,7 @@ public record Location(@Nullable String worldId, double x, double y, double z, f
     }
 
     @Override
-    public Point add(Point other) {
+    public Point add(@NotNull Point other) {
         return new Location(worldId, x() + other.x(), y() + other.y(), z() + other.z(), yaw, pitch);
     }
 }

@@ -3,6 +3,9 @@ package com.guflimc.brick.maths.spigot.api;
 import com.guflimc.brick.maths.api.geo.pos.Location;
 import com.guflimc.brick.maths.api.geo.pos.Vector;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+
+import java.util.UUID;
 
 public class SpigotMaths {
 
@@ -11,11 +14,16 @@ public class SpigotMaths {
     }
 
     public static org.bukkit.Location toLocation(Location other) {
-        return new org.bukkit.Location(Bukkit.getWorld(other.worldId()), other.x(), other.y(), other.z(), other.yaw(), other.pitch());
+        World world = null;
+        if ( other.worldId() != null ) {
+            world = Bukkit.getWorld(other.worldId());
+        }
+        return new org.bukkit.Location(world, other.x(), other.y(), other.z(), other.yaw(), other.pitch());
     }
 
     public static Location toPosition(org.bukkit.Location other) {
-        return new Location(other.getWorld().getName(), other.getX(), other.getY(), other.getZ(), other.getYaw(), other.getPitch());
+        UUID worldId = other.getWorld() != null ? other.getWorld().getUID() : null;
+        return new Location(worldId, other.getX(), other.getY(), other.getZ(), other.getYaw(), other.getPitch());
     }
 
 }

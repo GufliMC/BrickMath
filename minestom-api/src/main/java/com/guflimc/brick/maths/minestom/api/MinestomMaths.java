@@ -33,7 +33,7 @@ public class MinestomMaths {
     public static Location toLocation(Entity entity) {
         Location loc = toLocation(entity.getPosition());
         if ( entity.getInstance() != null ) {
-            loc = loc.withWorldId(entity.getInstance().getUniqueId().toString());
+            loc = loc.withWorldId(entity.getInstance().getUniqueId());
         }
         return loc;
     }
