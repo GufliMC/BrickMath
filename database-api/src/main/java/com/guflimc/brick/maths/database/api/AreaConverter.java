@@ -22,7 +22,7 @@ public class AreaConverter implements AttributeConverter<Area, String> {
 
     @Override
     public String convertToDatabaseColumn(Area attribute) {
-        return gson.toJson(attribute);
+        return gson.toJson(attribute, Area.class);
     }
 
     @Override
