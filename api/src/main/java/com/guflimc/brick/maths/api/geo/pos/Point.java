@@ -27,10 +27,14 @@ public sealed interface Point permits Vector, Position {
     Point withZ(double z);
 
     default double distance(Point other) {
+        return Math.sqrt(distanceSquared(other));
+    }
+
+    default double distanceSquared(Point other) {
         double diffX = x() - other.x();
         double diffY = y() - other.y();
         double diffZ = z() - other.z();
-        return Math.sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
+        return diffX * diffX + diffY * diffY + diffZ * diffZ;
     }
 
     default Point addX(double x) {
@@ -50,4 +54,13 @@ public sealed interface Point permits Vector, Position {
     Point add(double x, double y, double z);
 
     Point add(Point other);
+
+    default Point subtract(Point other) {
+        return add(-other.x(), -other.y(), -other.z());
+    }
+
+    default Point subtract(double x, double y, double z) {
+        return add(-x, -y, -z);
+    }
+
 }
