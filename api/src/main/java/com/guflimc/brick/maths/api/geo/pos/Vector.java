@@ -52,4 +52,13 @@ public record Vector(double x, double y, double z) implements Point {
     public Vector add(Point other) {
         return new Vector(this.x + other.x(), this.y + other.y(), this.z + other.z());
     }
+
+    public double length() {
+        return distance(ZERO);
+    }
+
+    public Vector normalize() {
+        double length = length();
+        return new Vector(x / length, y / length, z / length);
+    }
 }

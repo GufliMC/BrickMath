@@ -47,4 +47,27 @@ public record Vector2(double x, double y) {
         }
         return new Vector2(x, y);
     }
+
+    public double distance(Vector2 other) {
+        return Math.sqrt(distanceSquared(other));
+    }
+
+    public double distanceSquared(Vector2 other) {
+        double diffX = x() - other.x();
+        double diffY = y() - other.y();
+        return diffX * diffX + diffY * diffY;
+    }
+
+    public double length() {
+        return distance(ZERO);
+    }
+
+    public Vector2 normalize() {
+        double length = length();
+        return new Vector2(x / length, y / length);
+    }
+
+
+
+
 }

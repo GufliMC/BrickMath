@@ -42,10 +42,10 @@ public record CuboidArea(Vector min, Vector max) implements Area {
     @Override
     public Contour contour() {
         return new Contour(List.of(
-                new Vector2(min.x(), min.y()),
-                new Vector2(max.x(), min.y()),
-                new Vector2(min.x(), max.y()),
-                new Vector2(max.x(), max.y())
+                new Vector2(min.x(), min.z()),
+                new Vector2(max.x(), min.z()),
+                new Vector2(max.x(), max.z()),
+                new Vector2(min.x(), max.z())
         ));
     }
 
