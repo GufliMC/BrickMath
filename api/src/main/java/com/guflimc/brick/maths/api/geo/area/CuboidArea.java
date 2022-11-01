@@ -51,6 +51,16 @@ public record CuboidArea(Vector min, Vector max) implements Area {
     }
 
     @Override
+    public double minY() {
+        return min.y();
+    }
+
+    @Override
+    public double maxY() {
+        return max.y();
+    }
+
+    @Override
     public java.awt.geom.Area geometry() {
         return new java.awt.geom.Area(new Rectangle(
                 (int) min.x(),

@@ -13,6 +13,10 @@ public interface Area {
 
     Contour contour();
 
+    double minY();
+
+    double maxY();
+
     default java.awt.geom.Area geometry() {
         List<Vector2> vertices = contour().vertices();
         int[] xpoints = new int[vertices.size()];
@@ -28,9 +32,12 @@ public interface Area {
      * Not sure if this is the most efficient way. Time will tell.
      */
     default boolean intersects(Area other) {
-        java.awt.geom.Area tmp = geometry();
-        tmp.intersect(other.geometry());
-        return tmp.isEmpty();
+        if ( minY() < other.maxY() && maxY() > other.minY() ) {
+            java.awt.geom.Area tmp = geometry();
+            tmp.intersect(other.geometry());
+            return tmp.isEmpty();
+        }
+        return false;
     }
 
 }

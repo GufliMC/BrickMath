@@ -137,4 +137,5 @@ public record PolyArea(double minY, double maxY, List<Vector2> points) implement
     public Contour contour() {
         return new Contour(points);
     }
+
 }
