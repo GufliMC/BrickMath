@@ -1,0 +1,4 @@
+
+dependencies {
+    api 'ch.poole.misc:bentley-ottmann:0.1.1'
+}

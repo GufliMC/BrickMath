@@ -5,6 +5,7 @@ import com.guflimc.brick.maths.api.geo.pos.Point;
 import com.guflimc.brick.maths.api.geo.pos.Vector;
 import com.guflimc.brick.maths.api.geo.pos.Vector2;
 
+import java.awt.*;
 import java.util.List;
 
 public record CuboidArea(Vector min, Vector max) implements Area {
@@ -49,4 +50,13 @@ public record CuboidArea(Vector min, Vector max) implements Area {
         ));
     }
 
+    @Override
+    public java.awt.geom.Area geometry() {
+        return new java.awt.geom.Area(new Rectangle(
+                (int) min.x(),
+                (int) min.z(),
+                (int) (max.x() - min.x()),
+                (int) (max.z() - min.z())
+        ));
+    }
 }

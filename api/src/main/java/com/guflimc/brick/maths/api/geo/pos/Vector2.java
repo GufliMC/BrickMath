@@ -1,8 +1,10 @@
 package com.guflimc.brick.maths.api.geo.pos;
 
+import bentleyottmann.IPoint;
+
 import java.util.Collection;
 
-public record Vector2(double x, double y) {
+public record Vector2(double x, double y) implements IPoint {
 
     public static final Vector2 ZERO = new Vector2(0, 0);
 

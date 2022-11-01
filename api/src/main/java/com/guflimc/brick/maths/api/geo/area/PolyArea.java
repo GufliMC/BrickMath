@@ -1,6 +1,9 @@
 package com.guflimc.brick.maths.api.geo.area;
 
+import bentleyottmann.BentleyOttmann;
+import bentleyottmann.ISegment;
 import com.guflimc.brick.maths.api.geo.pos.Point;
+import com.guflimc.brick.maths.api.geo.pos.Segment2;
 import com.guflimc.brick.maths.api.geo.pos.Vector2;
 
 import java.util.ArrayList;
@@ -24,6 +27,49 @@ public record PolyArea(double minY, double maxY, List<Vector2> points) implement
 
     public int size() {
         return points.size();
+    }
+
+    public boolean isComplex() {
+        List<ISegment> segments = new ArrayList<>();
+        for (int i = 0; i < points.size() - 1; i++) {
+            segments.add(new Segment2(points.get(i), points.get(i + 1)));
+        }
+        segments.add(new Segment2(points.get(points.size() - 1), points.get(0)));
+
+        BentleyOttmann bentleyOttmann = new BentleyOttmann(Vector2::new);
+        bentleyOttmann.addSegments(segments);
+        bentleyOttmann.findIntersections();
+
+        return bentleyOttmann.intersections().size() > 0;
+    }
+
+    public boolean isConvex() {
+        if (points.size() < 4) {
+            return true;
+        }
+
+        if (isComplex()) {
+            return false;
+        }
+
+        boolean sign = false;
+        int n = points.size();
+
+        for (int i = 0; i < n; i++) {
+            double dx1 = points.get((i + 2) % n).x() - points.get((i + 1) % n).x();
+            double dy1 = points.get((i + 2) % n).y() - points.get((i + 1) % n).y();
+            double dx2 = points.get(i).x() - points.get((i + 1) % n).x();
+            double dy2 = points.get(i).y() - points.get((i + 1) % n).y();
+            double zcrossproduct = dx1 * dy2 - dy1 * dx2;
+
+            if (i == 0) {
+                sign = zcrossproduct > 0;
+            } else if (sign != (zcrossproduct > 0)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
