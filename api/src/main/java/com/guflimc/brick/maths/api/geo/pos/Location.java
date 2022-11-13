@@ -94,4 +94,10 @@ public record Location(@Nullable UUID worldId, double x, double y, double z, flo
     public Point add(@NotNull Point other) {
         return new Location(worldId, x() + other.x(), y() + other.y(), z() + other.z(), yaw, pitch);
     }
+
+    @Override
+    public String toString() {
+        return "Location{world=" + worldId + ", x=" + x + ", y=" + y + ", z=" + z + ", yaw=" + yaw + ", pitch=" + pitch + "}";
+    }
+
 }

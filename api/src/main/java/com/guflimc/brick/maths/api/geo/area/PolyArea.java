@@ -13,12 +13,24 @@ import java.util.List;
 public record PolyArea(double minY, double maxY, List<Vector2> points) implements Area {
 
     public PolyArea(double minY, double maxY, List<Vector2> points) {
-        if (points.size() < 3) {
+        List<Vector2> clone = new ArrayList<>(points);
+
+        // remove points that are on a straight line between its two surrounding points
+        for ( int i = 2; i < points.size(); i++ ) {
+            Vector2 oneToTwo = points.get(i - 1).subtract(points.get(i - 2)).normalize();
+            Vector2 twoToThree = points.get(i).subtract(points.get(i - 1)).normalize();
+            if ( oneToTwo.equals(twoToThree) ) {
+                clone.remove(i - 1);
+            }
+        }
+
+        if (clone.size() < 3) {
             throw new IllegalArgumentException("Polygon area requires at least 3 points.");
         }
+
         this.minY = minY;
         this.maxY = maxY;
-        this.points = List.copyOf(points);
+        this.points = List.copyOf(clone);
     }
 
     public PolyArea(double minY, double maxY, Vector2... points) {

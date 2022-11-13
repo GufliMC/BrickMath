@@ -61,4 +61,9 @@ public record Vector(double x, double y, double z) implements Point {
         double length = length();
         return new Vector(x / length, y / length, z / length);
     }
+
+    @Override
+    public String toString() {
+        return "Vector{x=" + x + ", y=" + y + ", z=" + z + "}";
+    }
 }
