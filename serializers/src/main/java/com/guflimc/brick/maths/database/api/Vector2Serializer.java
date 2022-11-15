@@ -3,24 +3,25 @@ package com.guflimc.brick.maths.database.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.guflimc.brick.maths.api.geo.pos.Vector;
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
+import com.guflimc.brick.maths.api.geo.pos.Vector2;
+import com.guflimc.brick.maths.database.api.util.Serializer;
 import marcono1234.gson.recordadapter.RecordTypeAdapterFactory;
 
-@Converter
-public class VectorConverter implements AttributeConverter<Vector, String> {
+public class Vector2Serializer implements Serializer<Vector2> {
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapterFactory(RecordTypeAdapterFactory.DEFAULT)
             .create();
 
+    public static final Vector2Serializer INSTANCE = new Vector2Serializer();
+
     @Override
-    public String convertToDatabaseColumn(Vector attribute) {
+    public String serialize(Vector2 attribute) {
         return gson.toJson(attribute);
     }
 
     @Override
-    public Vector convertToEntityAttribute(String dbData) {
-        return gson.fromJson(dbData, Vector.class);
+    public Vector2 deserialize(String dbData) {
+        return gson.fromJson(dbData, Vector2.class);
     }
 }

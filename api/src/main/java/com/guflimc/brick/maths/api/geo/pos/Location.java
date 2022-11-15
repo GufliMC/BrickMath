@@ -96,6 +96,20 @@ public record Location(@Nullable UUID worldId, double x, double y, double z, flo
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if  (!(obj instanceof Location other)) {
+            return false;
+        }
+        double epsilon = 0.0001d;
+        return worldId.equals(other.worldId)
+                && Math.abs(x - other.x) < epsilon
+                && Math.abs(y - other.y) < epsilon
+                && Math.abs(z - other.z) < epsilon
+                && Math.abs(yaw - other.yaw) < epsilon
+                && Math.abs(pitch - other.pitch) < epsilon;
+    }
+
+    @Override
     public String toString() {
         return "Location{world=" + worldId + ", x=" + x + ", y=" + y + ", z=" + z + ", yaw=" + yaw + ", pitch=" + pitch + "}";
     }

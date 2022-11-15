@@ -63,6 +63,17 @@ public record Vector(double x, double y, double z) implements Point {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Vector other)) {
+            return false;
+        }
+        double epsilon = 0.0001d;
+        return Math.abs(x - other.x) < epsilon
+                && Math.abs(y - other.y) < epsilon
+                && Math.abs(z - other.z) < epsilon;
+    }
+
+    @Override
     public String toString() {
         return "Vector{x=" + x + ", y=" + y + ", z=" + z + "}";
     }

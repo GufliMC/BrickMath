@@ -70,6 +70,16 @@ public record Vector2(double x, double y) implements IPoint {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if  (!(obj instanceof Vector2 other)) {
+            return false;
+        }
+        double epsilon = 0.0001d;
+        return Math.abs(x - other.x) < epsilon
+                && Math.abs(y - other.y) < epsilon;
+    }
+
+    @Override
     public String toString() {
         return "Vector2{x=" + x + ", y=" + y + "}";
     }
