@@ -25,6 +25,14 @@ public record CuboidArea(Vector min, Vector max) implements Area {
         );
     }
 
+    public static CuboidArea of(double x1, double y1, double z1, double x2, double y2, double z2) {
+        return CuboidArea.of(new Vector(x1, y1, z1), new Vector(x2, y2, z2));
+    }
+
+    public static CuboidArea of(Point point) {
+        return CuboidArea.of(new Vector(0, 0, 0), point);
+    }
+
     @Override
     public boolean contains(Point point) {
         return min.x() <= Math.floor(point.x()) && max.x() >= Math.floor(point.x()) &&

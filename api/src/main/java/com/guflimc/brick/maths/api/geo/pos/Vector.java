@@ -44,6 +44,11 @@ public record Vector(double x, double y, double z) implements Point {
     }
 
     @Override
+    public Vector divide(double n) {
+        return new Vector(x / n, y / n, z / n);
+    }
+
+    @Override
     public Vector add(double x, double y, double z) {
         return new Vector(this.x + x, this.y + y, this.z + z);
     }
@@ -51,6 +56,36 @@ public record Vector(double x, double y, double z) implements Point {
     @Override
     public Vector add(Point other) {
         return new Vector(this.x + other.x(), this.y + other.y(), this.z + other.z());
+    }
+
+    @Override
+    public Vector add(double n) {
+        return new Vector(x + n, y + n, z + n);
+    }
+
+    @Override
+    public Vector floor() {
+        return new Vector(Math.floor(x), Math.floor(y), Math.floor(z));
+    }
+
+    @Override
+    public Vector ceil() {
+        return new Vector(Math.ceil(x), Math.ceil(y), Math.ceil(z));
+    }
+
+    @Override
+    public Point subtract(Point other) {
+        return add(new Vector(-other.x(), -other.y(), -other.z()));
+    }
+
+    @Override
+    public Point subtract(double x, double y, double z) {
+        return add(-x, -y, -z);
+    }
+
+    @Override
+    public Point subtract(double n) {
+        return add(-n);
     }
 
     public double length() {

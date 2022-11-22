@@ -81,18 +81,53 @@ public record Location(@Nullable UUID worldId, double x, double y, double z, flo
     }
 
     @Override
-    public Location scale(double v) {
-        return new Location(worldId, x() * v, y() * v, z() * v, yaw, pitch);
+    public Location scale(double n) {
+        return new Location(worldId, x() * n, y() * n, z() * n, yaw, pitch);
     }
 
     @Override
-    public Point add(double x, double y, double z) {
+    public Location divide(double n) {
+        return new Location(worldId, x / n, y / n, z / n, yaw, pitch);
+    }
+
+    @Override
+    public Location add(double x, double y, double z) {
         return new Location(worldId, x() + x, y() + y, z() + z, yaw, pitch);
     }
 
     @Override
-    public Point add(@NotNull Point other) {
+    public Location add(@NotNull Point other) {
         return new Location(worldId, x() + other.x(), y() + other.y(), z() + other.z(), yaw, pitch);
+    }
+
+    @Override
+    public Location add(double n) {
+        return new Location(worldId, x() + n, y() + n, z() + n, yaw, pitch);
+    }
+
+    @Override
+    public Location floor() {
+        return new Location(worldId, Math.floor(x()), Math.floor(y()), Math.floor(z()), yaw, pitch);
+    }
+
+    @Override
+    public Location ceil() {
+        return new Location(worldId, Math.ceil(x()), Math.ceil(y()), Math.ceil(z()), yaw, pitch);
+    }
+
+    @Override
+    public Location subtract(Point other) {
+        return add(new Vector(-other.x(), -other.y(), -other.z()));
+    }
+
+    @Override
+    public Point subtract(double x, double y, double z) {
+        return add(-x, -y, -z);
+    }
+
+    @Override
+    public Point subtract(double n) {
+        return add(-n);
     }
 
     @Override

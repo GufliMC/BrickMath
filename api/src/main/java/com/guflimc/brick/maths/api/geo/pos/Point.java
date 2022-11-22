@@ -49,11 +49,19 @@ public sealed interface Point permits Vector, Position {
         return withZ(z() + z);
     }
 
-    Point scale(double v);
+    Point scale(double n);
+
+    Point divide(double n);
 
     Point add(double x, double y, double z);
 
     Point add(Point other);
+
+    Point add(double n);
+
+    Point floor();
+
+    Point ceil();
 
     default Point subtract(Point other) {
         return add(-other.x(), -other.y(), -other.z());
@@ -61,6 +69,10 @@ public sealed interface Point permits Vector, Position {
 
     default Point subtract(double x, double y, double z) {
         return add(-x, -y, -z);
+    }
+
+    default Point subtract(double n) {
+        return add(-n);
     }
 
 }
