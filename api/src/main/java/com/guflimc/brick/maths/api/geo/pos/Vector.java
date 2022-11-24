@@ -4,7 +4,7 @@ public record Vector(double x, double y, double z) implements Point {
 
     public static final Vector ZERO = new Vector(0, 0, 0);
 
-    public static Vector from(Point point) {
+    public static Vector of(Point point) {
         return new Vector(point.x(), point.y(), point.z());
     }
 
@@ -74,17 +74,17 @@ public record Vector(double x, double y, double z) implements Point {
     }
 
     @Override
-    public Point subtract(Point other) {
+    public Vector subtract(Point other) {
         return add(new Vector(-other.x(), -other.y(), -other.z()));
     }
 
     @Override
-    public Point subtract(double x, double y, double z) {
+    public Vector subtract(double x, double y, double z) {
         return add(-x, -y, -z);
     }
 
     @Override
-    public Point subtract(double n) {
+    public Vector subtract(double n) {
         return add(-n);
     }
 
@@ -101,6 +101,9 @@ public record Vector(double x, double y, double z) implements Point {
     public boolean equals(Object obj) {
         if (!(obj instanceof Vector other)) {
             return false;
+        }
+        if ( other == this ) {
+            return true;
         }
         double epsilon = 0.0001d;
         return Math.abs(x - other.x) < epsilon

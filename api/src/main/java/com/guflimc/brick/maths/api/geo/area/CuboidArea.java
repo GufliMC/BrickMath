@@ -10,19 +10,24 @@ import java.util.List;
 
 public record CuboidArea(Vector min, Vector max) implements Area {
 
-    public static CuboidArea of(Point iv1, Point iv2) {
-        double minX = Math.min(iv1.x(), iv2.x());
-        double minY = Math.min(iv1.y(), iv2.y());
-        double minZ = Math.min(iv1.z(), iv2.z());
+    public CuboidArea(Vector min, Vector max) {
+        Vector v1 = min.floor();
+        Vector v2 = max.floor();
 
-        double maxX = Math.max(iv1.x(), iv2.x());
-        double maxY = Math.max(iv1.y(), iv2.y());
-        double maxZ = Math.max(iv1.z(), iv2.z());
+        double minX = Math.min(v1.x(), v2.x());
+        double minY = Math.min(v1.y(), v2.y());
+        double minZ = Math.min(v1.z(), v2.z());
 
-        return new CuboidArea(
-                new Vector(minX, minY, minZ),
-                new Vector(maxX, maxY, maxZ)
-        );
+        double maxX = Math.max(v1.x(), v2.x());
+        double maxY = Math.max(v1.y(), v2.y());
+        double maxZ = Math.max(v1.z(), v2.z());
+
+        this.min = new Vector(minX, minY, minZ);
+        this.max = new Vector(maxX, maxY, maxZ);
+    }
+
+    public static CuboidArea of(Point v1, Point v2) {
+        return new CuboidArea(Vector.of(v1), Vector.of(v2));
     }
 
     public static CuboidArea of(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -35,9 +40,10 @@ public record CuboidArea(Vector min, Vector max) implements Area {
 
     @Override
     public boolean contains(Point point) {
-        return min.x() <= Math.floor(point.x()) && max.x() >= Math.floor(point.x()) &&
-                min.y() <= Math.floor(point.y()) && max.y() >= Math.floor(point.y()) &&
-                min.z() <= Math.floor(point.z()) && max.z() >= Math.floor(point.z());
+        point = point.floor();
+        return min.x() <= point.x() && max.x() >= point.x() &&
+                min.y() <= point.y() && max.y() >= point.y() &&
+                min.z() <= point.z() && max.z() >= point.z();
     }
 
     public Vector min() {

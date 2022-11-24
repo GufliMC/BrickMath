@@ -3,6 +3,7 @@ package com.guflimc.brick.maths.api.geo.pos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public record Location(@Nullable UUID worldId, double x, double y, double z, float yaw,
@@ -121,12 +122,12 @@ public record Location(@Nullable UUID worldId, double x, double y, double z, flo
     }
 
     @Override
-    public Point subtract(double x, double y, double z) {
+    public Location subtract(double x, double y, double z) {
         return add(-x, -y, -z);
     }
 
     @Override
-    public Point subtract(double n) {
+    public Location subtract(double n) {
         return add(-n);
     }
 
@@ -135,8 +136,11 @@ public record Location(@Nullable UUID worldId, double x, double y, double z, flo
         if  (!(obj instanceof Location other)) {
             return false;
         }
+        if ( other == this ) {
+            return true;
+        }
         double epsilon = 0.0001d;
-        return worldId.equals(other.worldId)
+        return Objects.equals(worldId, other.worldId)
                 && Math.abs(x - other.x) < epsilon
                 && Math.abs(y - other.y) < epsilon
                 && Math.abs(z - other.z) < epsilon

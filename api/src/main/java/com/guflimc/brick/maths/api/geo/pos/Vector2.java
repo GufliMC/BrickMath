@@ -74,6 +74,9 @@ public record Vector2(double x, double y) implements IPoint {
         if  (!(obj instanceof Vector2 other)) {
             return false;
         }
+        if ( other == this ) {
+            return true;
+        }
         double epsilon = 0.0001d;
         return Math.abs(x - other.x) < epsilon
                 && Math.abs(y - other.y) < epsilon;
