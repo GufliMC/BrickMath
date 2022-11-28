@@ -1,9 +1,9 @@
-rootProject.name = 'BrickMaths'
+rootProject.name = 'BrickMath'
 
-include 'api'
-include 'minestom-api'
-include 'spigot-api'
+include 'common'
+include 'minestom'
+include 'spigot'
 
 include 'serializers'
-include 'database-converters'
+include 'database'
 

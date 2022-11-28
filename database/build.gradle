@@ -1,0 +1,11 @@
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    api project(':common')
+    api project(':serializers')
+
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+}

@@ -2,15 +2,15 @@ plugins {
     id 'pl.allegro.tech.build.axion-release' version '1.13.6'
 }
 
-group 'com.guflimc.brick.maths'
+group 'com.guflimc.brick.math'
 version = scmVersion.version
 
-def javadocProjects = [project(':spigot-api'), project(':minestom-api'), project(':serializers'),
-                       project(':database-converters'), project(':api')]
+def javadocProjects = [project(':common'), project(':spigot'), project(':minestom'),
+                       project(':serializers'), project(':database')]
 ext.set("javadocProjects", javadocProjects)
 
-def publishProjects = [project(':spigot-api'), project(':minestom-api'), project(':serializers'),
-                       project(':database-converters'), project(':api')]
+def publishProjects = [project(':common'), project(':spigot'), project(':minestom'),
+                       project(':serializers'), project(':database')]
 ext.set("publishProjects", publishProjects)
 
 subprojects {
