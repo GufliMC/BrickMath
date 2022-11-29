@@ -1,4 +1,4 @@
-# BrickMaths
+# BrickMath
 
 Implements some math functionality that can be used universally with a minecraft platform dependency.
 
@@ -19,16 +19,16 @@ repositories {
 ```
 dependencies {
     // universal
-    implementation 'com.guflimc.brick.maths:api:1.0-SNAPSHOT'
+    implementation 'com.guflimc.brick.math:api:1.0-SNAPSHOT'
     
     // database converters
-    implementation 'com.guflimc.brick.maths:database-api:1.0-SNAPSHOT'
+    implementation 'com.guflimc.brick.math:database:1.0-SNAPSHOT'
     
     // minestom converters
-    implementation 'com.guflimc.brick.maths:minestom-api:1.0-SNAPSHOT'
+    implementation 'com.guflimc.brick.math:minestom:1.0-SNAPSHOT'
     
     // spigot converters
-    implementation 'com.guflimc.brick.maths:spigot-api:1.0-SNAPSHOT'
+    implementation 'com.guflimc.brick.math:spigot:1.0-SNAPSHOT'
 }
 ```
 
@@ -38,9 +38,9 @@ You can find the javadocs for all platforms [here](https://guflimc.github.io/Bri
 
 ### Examples
 ```java
-Position position = new Position("world", 1, 1, 1, 0, 0);
+Location position = new Location("world", 1, 1, 1, 0, 0);
 
-Location loc = SpigotMaths.toLocation(position);
+org.bukkit.Location loc = SpigotMath.toLocation(position);
 
-Pos pos = MinesomMaths.toPos(position);
+Pos pos = MinesomMath.toPos(position);
 ```
