@@ -1,10 +1,14 @@
 package com.guflimc.brick.math.common.geometry.shape3d;
 
+import com.guflimc.brick.math.common.geometry.pos2.Point2;
 import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import com.guflimc.brick.math.common.geometry.pos3.Point3;
+import com.guflimc.brick.math.common.geometry.pos3.Vector3;
 import com.guflimc.brick.math.common.geometry.shape2d.Polygon;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public record PolyPrism(double minY, double maxY, Polygon polygon) implements ShapePrism3 {
@@ -57,7 +61,7 @@ public record PolyPrism(double minY, double maxY, Polygon polygon) implements Sh
         double xOld = polygon.vertices().get(npoints - 1).x();
         double zOld = polygon.vertices().get(npoints - 1).y();
 
-        for (Vector2 point : polygon) {
+        for (Vector2 point : polygon().vertices()) {
             xNew = point.x();
             zNew = point.y();
 
@@ -100,4 +104,30 @@ public record PolyPrism(double minY, double maxY, Polygon polygon) implements Sh
         return polygon;
     }
 
+    @NotNull
+    @Override
+    public Iterator<Point3> iterator() {
+        Iterator<Point2> polygon = polygon().iterator();
+        return new Iterator<>() {
+
+            private double y = minY;
+            private Point2 point2 = polygon.next();
+
+            @Override
+            public boolean hasNext() {
+                return y <= maxY && polygon.hasNext();
+            }
+
+            @Override
+            public Point3 next() {
+                if (y > maxY) {
+                    y = minY;
+                    point2 = polygon.next();
+                }
+                Point3 point = new Vector3(point2.x(), y, point2.y());
+                y++;
+                return point;
+            }
+        };
+    }
 }

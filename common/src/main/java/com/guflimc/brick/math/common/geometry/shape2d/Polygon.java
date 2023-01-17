@@ -3,6 +3,7 @@ package com.guflimc.brick.math.common.geometry.shape2d;
 import bentleyottmann.BentleyOttmann;
 import bentleyottmann.ISegment;
 import com.guflimc.brick.math.common.geometry.pos2.LineSegment2;
+import com.guflimc.brick.math.common.geometry.pos2.Point2;
 import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +11,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public record Polygon(List<Vector2> vertices) implements Shape2 {
+public class Polygon implements Shape2 {
+
+    private final List<Vector2> vertices;
+
+    private byte complex = -1;
+    private byte convex = -1;
 
     public Polygon(List<Vector2> vertices) {
         if (vertices.size() < 3) {
@@ -23,15 +29,26 @@ public record Polygon(List<Vector2> vertices) implements Shape2 {
         this(List.of(vertices));
     }
 
-    @NotNull
     @Override
-    public Iterator<Vector2> iterator() {
-        return vertices.iterator();
+    public List<Vector2> vertices() {
+        return vertices;
+    }
+
+    @Override
+    public boolean contains(Point2 point) {
+        return false;
     }
 
     //
-    
+
     public boolean isComplex() {
+        if (complex == -1) {
+            complex = (byte) (_isComplex() ? 1 : 0);
+        }
+        return complex == 1;
+    }
+
+    private boolean _isComplex() {
         List<ISegment> segments = new ArrayList<>();
         for (int i = 0; i < vertices.size() - 1; i++) {
             segments.add(new LineSegment2(vertices.get(i), vertices.get(i + 1)));
@@ -46,6 +63,13 @@ public record Polygon(List<Vector2> vertices) implements Shape2 {
     }
 
     public boolean isConvex() {
+        if ( convex == -1 ) {
+            convex = (byte) (_isConvex() ? 1 : 0);
+        }
+        return convex == 1;
+    }
+
+    private boolean _isConvex() {
         if (vertices.size() < 4) {
             return true;
         }
@@ -72,5 +96,55 @@ public record Polygon(List<Vector2> vertices) implements Shape2 {
         }
 
         return true;
+    }
+    
+    public Rectangle boundingBox() {
+        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
+        for (Vector2 vertex : vertices) {
+            if (vertex.x() < minX) minX = vertex.x();
+            if (vertex.y() < minY) minY = vertex.y();
+            if (vertex.x() > maxX) maxX = vertex.x();
+            if (vertex.y() > maxY) maxY = vertex.y();
+        }
+        return new Rectangle(new Vector2(minX, minY), new Vector2(maxX, maxY));
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Point2> iterator() {
+        if (!isConvex()) {
+            throw new IllegalStateException("Cannot iterate over a non-convex polygon.");
+        }
+
+        Vector2 dimensions = boundingBox().dimensions();
+        int max = dimensions.blockX() * dimensions.blockY();
+        return new Iterator<>() {
+
+            private Point2 next = find();
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return next != null;
+            }
+
+            @Override
+            public Point2 next() {
+                Point2 current = next;
+                next = find();
+                return current;
+            }
+
+            private Point2 find() {
+                Point2 point;
+                do {
+                    int x = index % dimensions.blockX();
+                    int y = (index / dimensions.blockX()) % dimensions.blockY();
+                    point = new Vector2(x, y);
+                    index++;
+                } while ( !contains(point) || index > max );
+                return point;
+            }
+        };
     }
 }

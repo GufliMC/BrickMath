@@ -16,6 +16,14 @@ public interface Point2 {
         return with(x(), y);
     }
 
+    default int blockX() {
+        return (int) x();
+    }
+
+    default int blockY() {
+        return (int) y();
+    }
+
     default Point2 addX(double x) {
         return withX(x() + x);
     }

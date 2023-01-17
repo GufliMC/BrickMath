@@ -5,8 +5,11 @@ import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import com.guflimc.brick.math.common.geometry.pos3.Point3;
 import com.guflimc.brick.math.common.geometry.pos3.Vector3;
 import com.guflimc.brick.math.common.geometry.shape2d.Rectangle;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.geom.Area;
+import java.util.Iterator;
+import java.util.Vector;
 
 public record RectPrism(double minY, double maxY, Rectangle rectangle) implements ShapePrism3 {
 
@@ -75,5 +78,35 @@ public record RectPrism(double minY, double maxY, Rectangle rectangle) implement
                 (int) (rectangle.max().x() - rectangle.min().x()),
                 (int) (rectangle.max().y() - rectangle. min().y())
         ));
+    }
+
+    public Vector3 dimensions() {
+        Vector2 dim2d = rectangle.dimensions();
+        return new Vector3(dim2d.x(), maxY - minY, dim2d.y());
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Point3> iterator() {
+        Vector3 dimensions = dimensions();
+        int max = dimensions.blockX() * dimensions.blockY() * dimensions.blockZ();
+        return new Iterator<>() {
+
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < max;
+            }
+
+            @Override
+            public Point3 next() {
+                int x = index % dimensions.blockX();
+                int y = (index / dimensions.blockX()) % dimensions.blockY();
+                int z = index / (dimensions.blockX() * dimensions.blockY());
+                index++;
+                return new Vector3(rectangle.min().x() + x, minY + y, rectangle.min().y() + z);
+            }
+        };
     }
 }
