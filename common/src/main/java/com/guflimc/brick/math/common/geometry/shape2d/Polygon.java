@@ -36,7 +36,17 @@ public class Polygon implements Shape2 {
 
     @Override
     public boolean contains(Point2 point) {
-        return false;
+        int i, j;
+        boolean result = false;
+        for (i = 0, j = vertices.size() - 1; i < vertices.size(); j = i++) {
+            if ((vertices.get(i).y() > point.y()) != (vertices.get(j).y() > point.y()) &&
+                    (point.x() < (vertices.get(j).x() - vertices.get(i).x())
+                            * (point.y() - vertices.get(i).y())
+                            / (vertices.get(j).y()-vertices.get(i).y()) + vertices.get(i).x())) {
+                result = !result;
+            }
+        }
+        return result;
     }
 
     //
