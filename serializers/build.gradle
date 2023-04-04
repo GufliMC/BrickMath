@@ -6,5 +6,4 @@ dependencies {
     api project(':common')
 
     implementation 'com.google.code.gson:gson:+'
-    implementation 'com.github.Marcono1234:gson-record-type-adapter-factory:v0.2.0'
 }

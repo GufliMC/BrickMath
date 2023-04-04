@@ -9,11 +9,11 @@ public class Point2Serializer implements Serializer<Point2> {
 
     @Override
     public String serialize(Point2 attribute) {
-        return Point3Serializer.gson.toJson(attribute);
+        return GsonTools.serialize(attribute);
     }
 
     @Override
     public Point2 deserialize(String dbData) {
-        return Point3Serializer.gson.fromJson(dbData, Vector2.class);
+        return GsonTools.deserialize(dbData, Point2.class, Vector2.class);
     }
 }
