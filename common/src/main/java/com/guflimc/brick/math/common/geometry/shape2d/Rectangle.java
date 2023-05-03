@@ -4,6 +4,7 @@ import com.guflimc.brick.math.common.geometry.pos2.Point2;
 import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.geom.Area;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,8 +26,21 @@ public record Rectangle(Vector2 min, Vector2 max) implements Shape2 {
                 point.y() >= min.y() && point.y() <= max.y();
     }
 
+    @Override
+    public Rectangle bounds() {
+        return this;
+    }
+
     public Vector2 dimensions() {
         return max.subtract(min);
+    }
+
+    @Override
+    public Area geometry() {
+        return new Area(new java.awt.Rectangle(
+                (int) min.x(), (int) min.y(),
+                (int) (max.x() - min.x()), (int) (max.y() - min.y())
+        ));
     }
 
     @NotNull

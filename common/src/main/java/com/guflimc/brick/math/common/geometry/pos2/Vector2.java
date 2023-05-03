@@ -1,10 +1,6 @@
 package com.guflimc.brick.math.common.geometry.pos2;
 
-import bentleyottmann.IPoint;
-
-import java.util.Collection;
-
-public record Vector2(double x, double y) implements IPoint, Point2 {
+public record Vector2(double x, double y) implements Point2 {
 
     public static final Vector2 ZERO = new Vector2(0, 0);
 

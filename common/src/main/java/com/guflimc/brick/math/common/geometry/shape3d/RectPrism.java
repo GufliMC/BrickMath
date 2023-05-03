@@ -53,6 +53,11 @@ public record RectPrism(double minY, double maxY, Rectangle rectangle) implement
     }
 
     @Override
+    public RectPrism bounds() {
+        return this;
+    }
+
+    @Override
     public double minY() {
         return minY;
     }
@@ -68,16 +73,6 @@ public record RectPrism(double minY, double maxY, Rectangle rectangle) implement
 
     public Vector3 max() {
         return new Vector3(rectangle.max().x(), maxY, rectangle.max().y());
-    }
-
-    @Override
-    public Area geometry() {
-        return new Area(new java.awt.Rectangle(
-                (int) rectangle.min().x(),
-                (int) rectangle.min().y(),
-                (int) (rectangle.max().x() - rectangle.min().x()),
-                (int) (rectangle.max().y() - rectangle. min().y())
-        ));
     }
 
     public Vector3 dimensions() {

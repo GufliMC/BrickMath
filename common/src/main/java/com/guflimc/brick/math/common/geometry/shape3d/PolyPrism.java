@@ -104,6 +104,11 @@ public record PolyPrism(double minY, double maxY, Polygon polygon) implements Sh
         return polygon;
     }
 
+    @Override
+    public RectPrism bounds() {
+        return new RectPrism(minY, maxY, polygon.bounds());
+    }
+
     @NotNull
     @Override
     public Iterator<Point3> iterator() {
