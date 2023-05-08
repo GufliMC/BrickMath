@@ -5,11 +5,11 @@ public record Vector3(double x, double y, double z) implements IPoint3<Vector3> 
     public static final Vector3 ZERO = new Vector3(0, 0, 0);
     public static final Vector3 IDENTITY = new Vector3(1, 1, 1);
 
-    public static Vector3 of(Point3 point) {
-        return new Vector3(point.x(), point.y(), point.z());
+    public Vector3(Point3 point) {
+        this(point.x(), point.y(), point.z());
     }
 
-    public static Vector3 a2b(Point3 a, Point3 b) {
+    public static Vector3 between(Point3 a, Point3 b) {
         return new Vector3(b.x() - a.x(), b.y() - a.y(), b.z() - a.z());
     }
 

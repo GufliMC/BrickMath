@@ -6,6 +6,12 @@ public record Vector2(double x, double y) implements Point2 {
 
     //
 
+    public Vector2(Point2 point) {
+        this(point.x(), point.y());
+    }
+
+    //
+
     @Override
     public Vector2 with(double x, double y) {
         return new Vector2(x, y);

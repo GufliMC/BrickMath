@@ -3,6 +3,7 @@ package com.guflimc.brick.math.common.geometry.shape3d;
 import com.guflimc.brick.math.common.geometry.pos2.Point2;
 import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import com.guflimc.brick.math.common.geometry.pos3.Point3;
+import com.guflimc.brick.math.common.geometry.pos3.Position;
 import com.guflimc.brick.math.common.geometry.pos3.Vector3;
 import com.guflimc.brick.math.common.geometry.shape2d.Polygon;
 import org.jetbrains.annotations.NotNull;
@@ -13,15 +14,15 @@ import java.util.List;
 
 public record PolyPrism(double minY, double maxY, Polygon polygon) implements ShapePrism3 {
 
-    public static PolyPrism of(double minY, double maxY, List<Vector2> points) {
+    public static PolyPrism of(double minY, double maxY, List<Point2> points) {
         points = new ArrayList<>(points);
 
         // remove points that are on a straight line between its two surrounding points, also removes duplicates
         int index = 2;
         while (index <= points.size()) {
-            Vector2 current = index == points.size() ? points.get(0) : points.get(index);
-            Vector2 oneToTwo = points.get(index - 1).subtract(points.get(index - 2)).normalize();
-            Vector2 twoToThree = current.subtract(points.get(index - 1)).normalize();
+            Point2 current = index == points.size() ? points.get(0) : points.get(index);
+            Vector2 oneToTwo = points.get(index - 1).subtract(points.get(index - 2)).toVector().normalize();
+            Vector2 twoToThree = current.subtract(points.get(index - 1)).toVector().normalize();
             if (oneToTwo.equals(twoToThree)) {
                 points.remove(index - 1);
                 continue;
@@ -32,7 +33,7 @@ public record PolyPrism(double minY, double maxY, Polygon polygon) implements Sh
         return new PolyPrism(minY, maxY, new Polygon(points));
     }
 
-    public static PolyPrism of(double minY, double maxY, Vector2... points) {
+    public static PolyPrism of(double minY, double maxY, Point2... points) {
         return of(minY, maxY, List.of(points));
     }
 
@@ -61,7 +62,7 @@ public record PolyPrism(double minY, double maxY, Polygon polygon) implements Sh
         double xOld = polygon.vertices().get(npoints - 1).x();
         double zOld = polygon.vertices().get(npoints - 1).y();
 
-        for (Vector2 point : polygon().vertices()) {
+        for (Point2 point : polygon().vertices()) {
             xNew = point.x();
             zNew = point.y();
 

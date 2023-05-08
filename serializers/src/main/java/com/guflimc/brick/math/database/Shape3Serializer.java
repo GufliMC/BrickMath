@@ -15,7 +15,7 @@ public class Shape3Serializer implements Serializer<Shape3> {
 
     @Override
     public Shape3 deserialize(String dbData) {
-        return GsonTools.deserialize(dbData, Shape3.class, RectPrism.class, PolyPrism.class);
+        return GsonTools.deserialize(dbData, Shape3.class);
     }
 
 }

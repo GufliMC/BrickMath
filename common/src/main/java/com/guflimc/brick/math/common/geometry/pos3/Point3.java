@@ -102,4 +102,8 @@ public interface Point3 {
         return add(-n);
     }
 
+    default Vector3 toVector() {
+        return this instanceof Vector3 ? (Vector3) this : new Vector3(this);
+    }
+
 }

@@ -15,6 +15,6 @@ public class Point3Serializer implements Serializer<Point3> {
 
     @Override
     public Point3 deserialize(String dbData) {
-        return GsonTools.deserialize(dbData, Point3.class, Vector3.class, Location.class);
+        return GsonTools.deserialize(dbData, Point3.class);
     }
 }

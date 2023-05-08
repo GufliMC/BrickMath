@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface Shape2 extends Iterable<Point2> {
 
-    List<Vector2> vertices();
+    List<Point2> vertices();
 
     boolean contains(Point2 point);
 
@@ -24,7 +24,7 @@ public interface Shape2 extends Iterable<Point2> {
     }
 
     default Area geometry() {
-        List<Vector2> vertices = vertices();
+        List<Point2> vertices = vertices();
         int[] xpoints = new int[vertices.size()];
         int[] ypoints = new int[vertices.size()];
         for (int i = 0; i < vertices.size(); i++) {

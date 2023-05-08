@@ -58,4 +58,7 @@ public interface Point2 {
         return diffX * diffX + diffY * diffY;
     }
 
+    default Vector2 toVector() {
+        return this instanceof Vector2 ? (Vector2) this : new Vector2(this);
+    }
 }

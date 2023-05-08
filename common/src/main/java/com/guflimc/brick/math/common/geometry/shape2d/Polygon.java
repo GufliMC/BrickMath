@@ -14,14 +14,14 @@ import java.util.NoSuchElementException;
 
 public class Polygon implements Shape2 {
 
-    private final List<Vector2> vertices;
+    private final List<Point2> vertices;
 
     private transient byte complex = -1;
     private transient byte convex = -1;
 
     private transient final Rectangle bounds;
 
-    public Polygon(List<Vector2> vertices) {
+    public Polygon(List<Point2> vertices) {
         if (vertices.size() < 3) {
             throw new IllegalArgumentException("A polygon requires at least 3 vertices.");
         }
@@ -29,7 +29,7 @@ public class Polygon implements Shape2 {
 
         // calculate bounding box
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE;
-        for (Vector2 vertex : vertices) {
+        for (Point2 vertex : vertices) {
             if (vertex.x() < minX) minX = vertex.x();
             if (vertex.y() < minY) minY = vertex.y();
             if (vertex.x() > maxX) maxX = vertex.x();
@@ -38,12 +38,12 @@ public class Polygon implements Shape2 {
         bounds = new Rectangle(new Vector2(minX, minY), new Vector2(maxX, maxY));
     }
 
-    public Polygon(Vector2... vertices) {
+    public Polygon(Point2... vertices) {
         this(List.of(vertices));
     }
 
     @Override
-    public List<Vector2> vertices() {
+    public List<Point2> vertices() {
         return vertices;
     }
 

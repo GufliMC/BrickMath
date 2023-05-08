@@ -15,7 +15,7 @@ public class Shape2Serializer implements Serializer<Shape2> {
 
     @Override
     public Shape2 deserialize(String dbData) {
-        return GsonTools.deserialize(dbData, Shape2.class, Rectangle.class, Polygon.class);
+        return GsonTools.deserialize(dbData, Shape2.class);
     }
 
 }

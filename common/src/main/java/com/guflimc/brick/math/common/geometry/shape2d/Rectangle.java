@@ -8,10 +8,10 @@ import java.awt.geom.Area;
 import java.util.Iterator;
 import java.util.List;
 
-public record Rectangle(Vector2 min, Vector2 max) implements Shape2 {
+public record Rectangle(Point2 min, Point2 max) implements Shape2 {
 
     @Override
-    public List<Vector2> vertices() {
+    public List<Point2> vertices() {
         return List.of(
                 min,
                 new Vector2(max.x(), min.y()),
@@ -32,7 +32,7 @@ public record Rectangle(Vector2 min, Vector2 max) implements Shape2 {
     }
 
     public Vector2 dimensions() {
-        return max.subtract(min);
+        return new Vector2(max).subtract(new Vector2(min));
     }
 
     @Override
