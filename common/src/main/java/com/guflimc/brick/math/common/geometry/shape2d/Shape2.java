@@ -1,14 +1,12 @@
 package com.guflimc.brick.math.common.geometry.shape2d;
 
 import com.guflimc.brick.math.common.geometry.pos2.Point2;
-import com.guflimc.brick.math.common.geometry.pos2.Vector2;
-import com.guflimc.brick.math.common.geometry.shape3d.Shape3;
-import com.guflimc.brick.math.common.geometry.shape3d.ShapePrism3;
 
-import java.awt.Polygon;
 import java.awt.geom.Area;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public interface Shape2 extends Iterable<Point2> {
@@ -31,13 +29,24 @@ public interface Shape2 extends Iterable<Point2> {
             xpoints[i] = (int) vertices.get(i).x();
             ypoints[i] = (int) vertices.get(i).y();
         }
-        return new Area(new Polygon(xpoints, ypoints, vertices.size()));
+        return new Area(new java.awt.Polygon(xpoints, ypoints, vertices.size()));
     }
 
     default boolean intersects(Shape2 other) {
         Area tmp = geometry();
         tmp.intersect(other.geometry());
         return !tmp.isEmpty(); // empty means no intersection
+    }
+
+    default List<Line2> contour() {
+        List<Line2> result = new ArrayList<>();
+        List<Point2> vertices = this.vertices();
+        Point2 point = vertices.get(vertices.size() - 1);
+        for (Point2 next : vertices) {
+            result.add(new Line2(point, next));
+            point = next;
+        }
+        return result;
     }
 
 }

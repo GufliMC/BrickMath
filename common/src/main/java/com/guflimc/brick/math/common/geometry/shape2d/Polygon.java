@@ -7,10 +7,8 @@ import com.guflimc.brick.math.common.geometry.pos2.Point2;
 import com.guflimc.brick.math.common.geometry.pos2.Vector2;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Polygon implements Shape2 {
 
@@ -57,8 +55,8 @@ public class Polygon implements Shape2 {
     @Override
     public boolean contains(Point2 point) {
         // fast check for outside bounds
-        if ( point.x() < bounds.min().x() || point.x() > bounds.max().x()
-                || point.y() < bounds.min().y() || point.y() > bounds.max().y() ) {
+        if (point.x() < bounds.min().x() || point.x() > bounds.max().x()
+                || point.y() < bounds.min().y() || point.y() > bounds.max().y()) {
             return false;
         }
 
@@ -148,7 +146,6 @@ public class Polygon implements Shape2 {
         bentleyOttmann.addSegments(segments);
         bentleyOttmann.findIntersections();
 
-        System.out.println(bentleyOttmann.intersections());
         return bentleyOttmann.intersections().size() > 0;
     }
 
@@ -157,12 +154,14 @@ public class Polygon implements Shape2 {
             return new BOIPoint(point.x(), point.y());
         }
     }
-    private record LineSegment2(BOIPoint p1, BOIPoint p2, String name) implements ISegment {}
+
+    private record LineSegment2(BOIPoint p1, BOIPoint p2, String name) implements ISegment {
+    }
 
     //
 
     public boolean isConvex() {
-        if ( convex == -1 ) {
+        if (convex == -1) {
             convex = (byte) (_isConvex() ? 1 : 0);
         }
         return convex == 1;
@@ -202,11 +201,6 @@ public class Polygon implements Shape2 {
     @NotNull
     @Override
     public Iterator<Point2> iterator() {
-//        if (!isConvex()) {
-//            throw new IllegalStateException("Cannot iterate over a non-convex polygon.");
-//        }
-
-        Vector2 dimensions = bounds().dimensions();
         return new Iterator<>() {
 
             private Point2 next = forward();
@@ -232,18 +226,57 @@ public class Polygon implements Shape2 {
                 Point2 point;
                 do {
                     point = new Vector2(bounds.min().blockX() + x, bounds.min().blockY() + y);
-                    if ( ++x <= bounds.max().blockX() ) {
+                    if (++x <= bounds.max().blockX()) {
                         continue;
                     }
                     x = bounds.min().blockX();
 
-                    if ( ++y <= bounds.max().blockY() ) {
+                    if (++y <= bounds.max().blockY()) {
                         continue;
                     }
                     return null;
-                } while ( !contains(point) );
+                } while (!contains(point));
                 return point;
             }
         };
+    }
+
+    //
+
+    public static Shape2 merge(Shape2... shapes) {
+        // collect all the contours of the shapes
+        List<Line2> lines = Arrays.stream(shapes)
+                .flatMap(s -> s.contour().stream())
+                .collect(Collectors.toList());
+
+        // remove adjacent contours to only retain the outer ones
+        for ( Line2 line : new ArrayList<>(lines) ) {
+            Line2 match = lines.stream()
+                    .filter(l -> l.from().equals(line.to()) && l.to().equals(line.from()))
+                    .findFirst().orElse(null);
+            if ( match != null ) {
+                lines.remove(line);
+                lines.remove(match);
+            }
+        }
+
+        // build shape from remaining contours
+        List<Point2> vertices = new ArrayList<>();
+        Line2 first = lines.remove(0);
+        vertices.add(first.from());
+        vertices.add(first.to());
+        outer: while ( !lines.isEmpty() ) {
+            for ( Line2 line : lines ) {
+                if ( vertices.get(vertices.size() - 1).equals(line.from()) ) {
+                    lines.remove(line);
+                    vertices.add(line.to());
+                    continue outer;
+                }
+            }
+
+            throw new RuntimeException("The given shapes are not adjacent and can't be merged.");
+        }
+
+        return new Polygon(vertices);
     }
 }

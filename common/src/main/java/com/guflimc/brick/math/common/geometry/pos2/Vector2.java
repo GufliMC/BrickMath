@@ -79,6 +79,6 @@ public record Vector2(double x, double y) implements Point2 {
 
     @Override
     public String toString() {
-        return "Vector2{x=" + x + ", y=" + y + "}";
+        return String.format("Vector2{x=%2.3f, y=%2.3f}", x, y);
     }
 }

@@ -10,6 +10,11 @@ import java.util.List;
 
 public record Rectangle(Point2 min, Point2 max) implements Shape2 {
 
+    public Rectangle(Point2 min, Point2 max) {
+        this.min = new Vector2(Math.min(min.x(), max.x()), Math.min(min.y(), max.y()));
+        this.max = new Vector2(Math.max(min.x(), max.x()), Math.max(min.y(), max.y()));
+    }
+
     @Override
     public List<Point2> vertices() {
         return List.of(
