@@ -1,4 +1,8 @@
-com.guflimc.brick.maths.api.geo
-com.guflimc.brick.maths.database.api
-com.guflimc.brick.maths.minestom.api
-com.guflimc.brick.maths.spigot.api
+com.guflimc.brick.math.common.geometry
+com.guflimc.brick.math.common.geometry.pos2
+com.guflimc.brick.math.common.geometry.pos3
+com.guflimc.brick.math.common.geometry.shape2d
+com.guflimc.brick.math.common.geometry.shape3d
+com.guflimc.brick.math.database
+com.guflimc.brick.math.minestom
+com.guflimc.brick.math.spigot
