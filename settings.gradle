@@ -1,9 +1,4 @@
 rootProject.name = 'BrickMath'
 
 include 'common'
-include 'minestom'
 include 'spigot'
-
-include 'serializers'
-include 'database'
-

@@ -1,9 +1,0 @@
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-    api project(':common')
-
-    implementation 'com.google.code.gson:gson:+'
-}

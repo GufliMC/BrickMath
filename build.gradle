@@ -5,12 +5,10 @@ plugins {
 group 'com.guflimc.brick.math'
 version = scmVersion.version
 
-def javadocProjects = [project(':common'), project(':spigot'), project(':minestom'),
-                       project(':serializers'), project(':database')]
+def javadocProjects = [project(':common'), project(':spigot')]
 ext.set("javadocProjects", javadocProjects)
 
-def publishProjects = [project(':common'), project(':spigot'), project(':minestom'),
-                       project(':serializers'), project(':database')]
+def publishProjects = [project(':common'), project(':spigot')]
 ext.set("publishProjects", publishProjects)
 
 subprojects {
