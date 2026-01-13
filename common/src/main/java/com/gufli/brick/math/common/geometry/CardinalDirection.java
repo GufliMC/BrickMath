@@ -1,5 +1,6 @@
 package com.gufli.brick.math.common.geometry;
 
+import com.gufli.brick.math.common.geometry.pos3.Point3;
 import com.gufli.brick.math.common.geometry.pos3.Vector3;
 
 public enum CardinalDirection {
@@ -32,12 +33,12 @@ public enum CardinalDirection {
         return values[ordinal];
     }
 
-    public <T extends IPoint3<T>> T forwards(T point, double amount) {
-        return point.add(direction.scale(amount));
+    public <T extends Point3> T forwards(T point, double amount) {
+        return (T) point.add(direction.scale(amount));
     }
 
-    public <T extends IPoint3<T>> T backwards(T point, double amount) {
-        return point.add(direction.scale(-amount));
+    public <T extends Point3> T backwards(T point, double amount) {
+        return (T) point.add(direction.scale(-amount));
     }
 
     public Vector3 direction() {
